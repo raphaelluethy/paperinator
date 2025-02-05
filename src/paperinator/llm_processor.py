@@ -34,8 +34,9 @@ class LLMProcessor:
 
         # First pass to find max number of questions
         for result in results:
-            if isinstance(result.get("research_questions"), list):
-                max_questions = max(max_questions, len(result["research_questions"]))
+            questions = result.get("research_questions", [])
+            if isinstance(questions, list):
+                max_questions = max(max_questions, len(questions))
 
         # Second pass to normalize research questions into separate columns
         for result in results:
@@ -46,12 +47,14 @@ class LLMProcessor:
                 # Add each question as a separate column
                 for i, q in enumerate(padded_questions):
                     result[f"research_question_{i + 1}"] = q
-                # Remove original research_questions list
-                del result["research_questions"]
             else:
                 # Handle case where research_questions is not a list
                 result["research_question_1"] = questions
                 for i in range(2, max_questions + 1):
                     result[f"research_question_{i}"] = None
+
+            # Safely remove research_questions if it exists
+            if "research_questions" in result:
                 del result["research_questions"]
+
         return pd.DataFrame(results)

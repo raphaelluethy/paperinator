@@ -55,6 +55,19 @@ def main():
         logger.info(f"Processing file {idx}/{total_files}: {file_path.name}")
 
         try:
+            # Check for cached JSON result
+            json_filename = to_camel_case(file_path.name) + ".json"
+            json_path = json_output_dir / json_filename
+
+            if json_path.exists():
+                logger.info(
+                    f"Found cached result for {file_path.name}, loading from {json_path}"
+                )
+                with open(json_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                results.append(data)
+                continue
+
             # Get OCR text
             logger.debug(f"Running OCR on {file_path.name}")
             text = ocr.process_file(file_path)
@@ -66,10 +79,7 @@ def main():
             results.append(data)
 
             # Save individual JSON result
-            json_filename = to_camel_case(file_path.name) + ".json"
-            json_path = json_output_dir / json_filename
             logger.debug(f"Saving JSON result to {json_path}")
-
             with open(json_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2, ensure_ascii=False)
 
