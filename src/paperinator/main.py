@@ -91,6 +91,7 @@ def main():
     logger.info("Creating final DataFrame")
     df = llm.create_dataframe(results)
     df.to_csv("out/output.csv", index=False)
+    df.to_json("out/output.json", orient="records", indent=2)
     logger.info(f"Processed {len(results)} files. Results saved to out/output.csv")
 
 
