@@ -23,7 +23,9 @@ class LLMProcessor:
         )
 
         try:
-            return json.loads(response.choices[0].message.content)
+            result = response.choices[0].message.content 
+            assert(result is not None)
+            return json.loads(result)
         except json.JSONDecodeError:
             return {}
 
