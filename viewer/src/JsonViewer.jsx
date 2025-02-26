@@ -1,5 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Moon, Sun, ChevronDown, ChevronRight, ArrowLeft, ArrowRight, Upload } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import {
+  Moon,
+  Sun,
+  ChevronDown,
+  ChevronRight,
+  ArrowLeft,
+  ArrowRight,
+  Upload,
+} from "lucide-react";
 
 const JsonViewer = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -14,7 +22,7 @@ const JsonViewer = () => {
     authors: false,
     keywords: false,
     recommendations: false,
-    research_questions: false
+    research_questions: false,
   });
   const [jsonData, setJsonData] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -84,7 +92,7 @@ const JsonViewer = () => {
         authors: false,
         keywords: false,
         recommendations: false,
-        research_questions: false
+        research_questions: false,
       });
     }
   };
@@ -104,7 +112,7 @@ const JsonViewer = () => {
         authors: false,
         keywords: false,
         recommendations: false,
-        research_questions: false
+        research_questions: false,
       });
     }
   };
@@ -112,25 +120,8 @@ const JsonViewer = () => {
   const toggleSection = (section) => {
     setExpandedSections({
       ...expandedSections,
-      [section]: !expandedSections[section]
+      [section]: !expandedSections[section],
     });
-  };
-
-  // Function to render array items
-  const renderArray = (array, indentLevel = 1) => {
-    return (
-      <div className="pl-4">
-        {array.map((item, index) => (
-          <div key={index} className="py-1">
-            {typeof item === 'object' && item !== null ? (
-              renderObject(item, indentLevel + 1)
-            ) : (
-              <span className="font-mono">{JSON.stringify(item)}</span>
-            )}
-          </div>
-        ))}
-      </div>
-    );
   };
 
   // Group research questions
@@ -149,7 +140,9 @@ const JsonViewer = () => {
     const researchQuestions = getResearchQuestions(paper);
 
     return (
-      <div className={`rounded-lg overflow-hidden shadow-lg ${darkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'}`}>
+      <div
+        className={`rounded-lg overflow-hidden shadow-lg ${darkMode ? "bg-gray-800 text-gray-200" : "bg-white text-gray-800"}`}
+      >
         <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-bold">{paper.title}</h2>
@@ -161,16 +154,22 @@ const JsonViewer = () => {
             </div>
             <div>
               <button
-                onClick={() => toggleSection('authors')}
+                onClick={() => toggleSection("authors")}
                 className="flex items-center text-sm font-medium"
               >
-                {expandedSections.authors ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                {expandedSections.authors ? (
+                  <ChevronDown size={16} />
+                ) : (
+                  <ChevronRight size={16} />
+                )}
                 Authors
               </button>
               {expandedSections.authors && (
                 <div className="mt-1 pl-6">
                   {paper.authors.map((author, index) => (
-                    <div key={index} className="text-sm">{author}</div>
+                    <div key={index} className="text-sm">
+                      {author}
+                    </div>
                   ))}
                 </div>
               )}
@@ -191,10 +190,14 @@ const JsonViewer = () => {
 
           <div className="mb-4">
             <button
-              onClick={() => toggleSection('keywords')}
+              onClick={() => toggleSection("keywords")}
               className="flex items-center font-semibold text-lg mb-2"
             >
-              {expandedSections.keywords ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+              {expandedSections.keywords ? (
+                <ChevronDown size={16} />
+              ) : (
+                <ChevronRight size={16} />
+              )}
               Keywords
             </button>
             {expandedSections.keywords && (
@@ -202,7 +205,7 @@ const JsonViewer = () => {
                 {paper.keywords.map((keyword, index) => (
                   <span
                     key={index}
-                    className={`px-2 py-1 text-xs rounded ${darkMode ? 'bg-blue-900 text-blue-100' : 'bg-blue-100 text-blue-800'}`}
+                    className={`px-2 py-1 text-xs rounded ${darkMode ? "bg-blue-900 text-blue-100" : "bg-blue-100 text-blue-800"}`}
                   >
                     {keyword}
                   </span>
@@ -213,16 +216,22 @@ const JsonViewer = () => {
 
           <div className="mb-4">
             <button
-              onClick={() => toggleSection('challenges_and_gaps')}
+              onClick={() => toggleSection("challenges_and_gaps")}
               className="flex items-center font-semibold text-lg mb-2"
             >
-              {expandedSections.challenges_and_gaps ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+              {expandedSections.challenges_and_gaps ? (
+                <ChevronDown size={16} />
+              ) : (
+                <ChevronRight size={16} />
+              )}
               Challenges and Gaps
             </button>
             {expandedSections.challenges_and_gaps && (
               <ul className="list-disc pl-6 mb-2">
                 {paper.challenges_and_gaps.map((item, index) => (
-                  <li key={index} className="text-sm mb-1">{item}</li>
+                  <li key={index} className="text-sm mb-1">
+                    {item}
+                  </li>
                 ))}
               </ul>
             )}
@@ -230,16 +239,22 @@ const JsonViewer = () => {
 
           <div className="mb-4">
             <button
-              onClick={() => toggleSection('novelties')}
+              onClick={() => toggleSection("novelties")}
               className="flex items-center font-semibold text-lg mb-2"
             >
-              {expandedSections.novelties ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+              {expandedSections.novelties ? (
+                <ChevronDown size={16} />
+              ) : (
+                <ChevronRight size={16} />
+              )}
               Novelties
             </button>
             {expandedSections.novelties && (
               <ul className="list-disc pl-6 mb-2">
                 {paper.novelties.map((item, index) => (
-                  <li key={index} className="text-sm mb-1">{item}</li>
+                  <li key={index} className="text-sm mb-1">
+                    {item}
+                  </li>
                 ))}
               </ul>
             )}
@@ -247,16 +262,22 @@ const JsonViewer = () => {
 
           <div className="mb-4">
             <button
-              onClick={() => toggleSection('main_findings')}
+              onClick={() => toggleSection("main_findings")}
               className="flex items-center font-semibold text-lg mb-2"
             >
-              {expandedSections.main_findings ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+              {expandedSections.main_findings ? (
+                <ChevronDown size={16} />
+              ) : (
+                <ChevronRight size={16} />
+              )}
               Main Findings
             </button>
             {expandedSections.main_findings && (
               <ul className="list-disc pl-6 mb-2">
                 {paper.main_findings.map((item, index) => (
-                  <li key={index} className="text-sm mb-1">{item}</li>
+                  <li key={index} className="text-sm mb-1">
+                    {item}
+                  </li>
                 ))}
               </ul>
             )}
@@ -264,16 +285,22 @@ const JsonViewer = () => {
 
           <div className="mb-4">
             <button
-              onClick={() => toggleSection('contributions')}
+              onClick={() => toggleSection("contributions")}
               className="flex items-center font-semibold text-lg mb-2"
             >
-              {expandedSections.contributions ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+              {expandedSections.contributions ? (
+                <ChevronDown size={16} />
+              ) : (
+                <ChevronRight size={16} />
+              )}
               Contributions
             </button>
             {expandedSections.contributions && (
               <ul className="list-disc pl-6 mb-2">
                 {paper.contributions.map((item, index) => (
-                  <li key={index} className="text-sm mb-1">{item}</li>
+                  <li key={index} className="text-sm mb-1">
+                    {item}
+                  </li>
                 ))}
               </ul>
             )}
@@ -281,16 +308,22 @@ const JsonViewer = () => {
 
           <div className="mb-4">
             <button
-              onClick={() => toggleSection('limitations')}
+              onClick={() => toggleSection("limitations")}
               className="flex items-center font-semibold text-lg mb-2"
             >
-              {expandedSections.limitations ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+              {expandedSections.limitations ? (
+                <ChevronDown size={16} />
+              ) : (
+                <ChevronRight size={16} />
+              )}
               Limitations
             </button>
             {expandedSections.limitations && (
               <ul className="list-disc pl-6 mb-2">
                 {paper.limitations.map((item, index) => (
-                  <li key={index} className="text-sm mb-1">{item}</li>
+                  <li key={index} className="text-sm mb-1">
+                    {item}
+                  </li>
                 ))}
               </ul>
             )}
@@ -298,16 +331,22 @@ const JsonViewer = () => {
 
           <div className="mb-4">
             <button
-              onClick={() => toggleSection('future_work')}
+              onClick={() => toggleSection("future_work")}
               className="flex items-center font-semibold text-lg mb-2"
             >
-              {expandedSections.future_work ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+              {expandedSections.future_work ? (
+                <ChevronDown size={16} />
+              ) : (
+                <ChevronRight size={16} />
+              )}
               Future Work
             </button>
             {expandedSections.future_work && (
               <ul className="list-disc pl-6 mb-2">
                 {paper.future_work.map((item, index) => (
-                  <li key={index} className="text-sm mb-1">{item}</li>
+                  <li key={index} className="text-sm mb-1">
+                    {item}
+                  </li>
                 ))}
               </ul>
             )}
@@ -316,16 +355,22 @@ const JsonViewer = () => {
           {paper.recommendations && paper.recommendations.length > 0 && (
             <div className="mb-4">
               <button
-                onClick={() => toggleSection('recommendations')}
+                onClick={() => toggleSection("recommendations")}
                 className="flex items-center font-semibold text-lg mb-2"
               >
-                {expandedSections.recommendations ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                {expandedSections.recommendations ? (
+                  <ChevronDown size={16} />
+                ) : (
+                  <ChevronRight size={16} />
+                )}
                 Recommendations
               </button>
               {expandedSections.recommendations && (
                 <ul className="list-disc pl-6 mb-2">
                   {paper.recommendations.map((item, index) => (
-                    <li key={index} className="text-sm mb-1">{item}</li>
+                    <li key={index} className="text-sm mb-1">
+                      {item}
+                    </li>
                   ))}
                 </ul>
               )}
@@ -335,17 +380,22 @@ const JsonViewer = () => {
           {researchQuestions.length > 0 && (
             <div className="mb-4">
               <button
-                onClick={() => toggleSection('research_questions')}
+                onClick={() => toggleSection("research_questions")}
                 className="flex items-center font-semibold text-lg mb-2"
               >
-                {expandedSections.research_questions ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                {expandedSections.research_questions ? (
+                  <ChevronDown size={16} />
+                ) : (
+                  <ChevronRight size={16} />
+                )}
                 Research Questions
               </button>
               {expandedSections.research_questions && (
                 <ul className="list-disc pl-6 mb-2">
                   {researchQuestions.map((question, index) => (
                     <li key={index} className="text-sm mb-1">
-                      <span className="font-medium">RQ{question.number}: </span>{question.text}
+                      <span className="font-medium">RQ{question.number}: </span>
+                      {question.text}
                     </li>
                   ))}
                 </ul>
@@ -361,7 +411,9 @@ const JsonViewer = () => {
 
         <div className="px-6 py-2 border-t border-gray-200 dark:border-gray-700">
           <div className="flex justify-between items-center">
-            <span className="text-xs opacity-70">Filename: {paper.filename}</span>
+            <span className="text-xs opacity-70">
+              Filename: {paper.filename}
+            </span>
           </div>
         </div>
       </div>
@@ -369,16 +421,23 @@ const JsonViewer = () => {
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-200 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+    <div
+      className={`min-h-screen transition-colors duration-200 ${darkMode ? "bg-gray-900" : "bg-gray-50"}`}
+    >
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-6">
-          <h1 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+          <h1
+            className={`text-2xl font-bold ${darkMode ? "text-white" : "text-gray-900"}`}
+          >
             Academic Paper Viewer
           </h1>
           <div className="flex items-center space-x-4">
             <label
-              className={`flex items-center space-x-2 px-3 py-2 rounded-md cursor-pointer ${darkMode ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
+              className={`flex items-center space-x-2 px-3 py-2 rounded-md cursor-pointer ${
+                darkMode
+                  ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              }`}
             >
               <Upload size={16} />
               <span className="text-sm font-medium">Load JSON</span>
@@ -391,7 +450,7 @@ const JsonViewer = () => {
             </label>
             <button
               onClick={toggleDarkMode}
-              className={`p-2 rounded-full ${darkMode ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
+              className={`p-2 rounded-full ${darkMode ? "bg-gray-700 text-yellow-300" : "bg-gray-200 text-gray-700"}`}
               aria-label="Toggle dark mode"
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
@@ -400,15 +459,17 @@ const JsonViewer = () => {
         </div>
 
         {isLoading ? (
-          <div className={`text-center py-12 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <div
+            className={`text-center py-12 ${darkMode ? "text-gray-300" : "text-gray-600"}`}
+          >
             Loading...
           </div>
         ) : error ? (
-          <div className="text-center py-12 text-red-500">
-            {error}
-          </div>
+          <div className="text-center py-12 text-red-500">{error}</div>
         ) : jsonData.length === 0 ? (
-          <div className={`text-center py-12 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <div
+            className={`text-center py-12 ${darkMode ? "text-gray-300" : "text-gray-600"}`}
+          >
             No data available. Please upload a JSON file.
           </div>
         ) : (
@@ -418,36 +479,38 @@ const JsonViewer = () => {
               <button
                 onClick={goToPrevious}
                 disabled={currentIndex === 0}
-                className={`p-2 rounded-md ${currentIndex === 0
-                  ? 'opacity-50 cursor-not-allowed'
-                  : darkMode
-                    ? 'bg-gray-700 text-gray-200 hover:bg-gray-600'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                  }`}
+                className={`p-2 rounded-md ${
+                  currentIndex === 0
+                    ? "opacity-50 cursor-not-allowed"
+                    : darkMode
+                      ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                }`}
               >
                 <ArrowLeft size={20} />
               </button>
-              <div className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              <div
+                className={`text-sm font-medium ${darkMode ? "text-gray-300" : "text-gray-600"}`}
+              >
                 Paper {currentIndex + 1} of {jsonData.length}
               </div>
               <button
                 onClick={goToNext}
                 disabled={currentIndex === jsonData.length - 1}
-                className={`p-2 rounded-md ${currentIndex === jsonData.length - 1
-                  ? 'opacity-50 cursor-not-allowed'
-                  : darkMode
-                    ? 'bg-gray-700 text-gray-200 hover:bg-gray-600'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                  }`}
+                className={`p-2 rounded-md ${
+                  currentIndex === jsonData.length - 1
+                    ? "opacity-50 cursor-not-allowed"
+                    : darkMode
+                      ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                }`}
               >
                 <ArrowRight size={20} />
               </button>
             </div>
 
             {jsonData.length > 0 && currentIndex < jsonData.length && (
-              <div className="mb-8">
-                {renderPaper(jsonData[currentIndex])}
-              </div>
+              <div className="mb-8">{renderPaper(jsonData[currentIndex])}</div>
             )}
           </>
         )}
