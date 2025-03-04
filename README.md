@@ -9,7 +9,7 @@ Also, I only tested it with MacOS, if you use Windows youre already a poor soul,
 
 - Python 3.8 or higher
 - Tesseract OCR installed on your system
-- OpenAI API key
+- OpenAI API key or Google AI API key
 
 ## Installation
 
@@ -31,9 +31,16 @@ rye sync
 
 ## Configuration
 
-1. Set your OpenAI API key as an environment variable:
+1. Set your API key as an environment variable:
+
+For OpenAI:
 ```bash
 export OPENAI_API_KEY='your-api-key-here'
+```
+
+For Google Gemini:
+```bash
+export GOOGLE_API_KEY='your-api-key-here'
 ```
 
 ## Usage
@@ -43,6 +50,22 @@ export OPENAI_API_KEY='your-api-key-here'
 2. Run the processor:
 ```bash
 python -m paperinator.main
+```
+
+By default, the processor uses OpenAI models. To use Google Gemini models, specify the model provider:
+
+```bash
+python -m paperinator.main --model-provider gemini
+```
+
+You can also specify a specific model:
+
+```bash
+python -m paperinator.main --model-provider openai --model-name gpt-4o
+```
+
+```bash
+python -m paperinator.main --model-provider gemini --model-name gemini-2.0-flash
 ```
 
 The script will:
@@ -66,6 +89,7 @@ The script will:
 - pdf2image >= 1.17.0
 - pandas >= 2.2.3
 - pillow >= 11.1.0
+- google-generativeai >= 0.3.1
 
 ## Logging
 
